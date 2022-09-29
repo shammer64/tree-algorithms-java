@@ -39,4 +39,20 @@ public class BinarySearchTreeTest {
         assertEquals(1, bst.depth());
     }
 
+    @Test
+    public void singleItemTreeCanBeInsertedAfterAndHasCardinalityOfTwo() {
+        BinarySearchTree<String> bst = new BinarySearchTree();
+        bst.insert("Iowa Hawkeyes");
+        bst.insert("Michigan State Spartans");
+        assertEquals(2, bst.cardinality());
+    }
+
+    @Test
+    public void singleItemTreeCanBeInsertedAfterAndHasDepthOfTwo() {
+        BinarySearchTree<String> bst = new BinarySearchTree();
+        bst.insert("Iowa Hawkeyes");
+        bst.insert("Michigan State Spartans");
+        assertEquals(2, bst.depth());
+    }
+
 }
