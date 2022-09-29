@@ -47,4 +47,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
             left.insert(newValue);
         }
     }
+
+    public BinarySearchTree<T> search(T searchValue) {
+        if (value == null) return null;
+        if (value.compareTo(searchValue) == 0) return this;
+        return null;
+    }
+
+    public T value() {
+        return value;
+    }
 }

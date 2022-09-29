@@ -2,7 +2,7 @@ package com.shammer.algorithms.tree;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BinarySearchTreeTest {
 
@@ -28,58 +28,81 @@ public class BinarySearchTreeTest {
     @Test
     public void emptyTreeCanBeInsertedIntoAndHasCardinalityOfZero() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert("Iowa Hawkeyes");
+        bst.insert(BigTenSchools.IOWA);
         assertEquals(1, bst.cardinality());
     }
 
     @Test
     public void singleItemTreeHasDepthOfOne() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert("Iowa Hawkeyes");
+        bst.insert(BigTenSchools.IOWA);
         assertEquals(1, bst.depth());
     }
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasCardinalityOfTwo() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert("Iowa Hawkeyes");
-        bst.insert("Michigan State Spartans");
+        bst.insert(BigTenSchools.IOWA);
+        bst.insert(BigTenSchools.MICHIGAN_STATE);
         assertEquals(2, bst.cardinality());
     }
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasDepthOfTwo() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert("Iowa Hawkeyes");
-        bst.insert("Michigan State Spartans");
+        bst.insert(BigTenSchools.IOWA);
+        bst.insert(BigTenSchools.MICHIGAN_STATE);
         assertEquals(2, bst.depth());
     }
 
     @Test
     public void twoItemTreeCanBeInsertedBeforeAndHasCardinalityOfThree() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert("Iowa Hawkeyes");
-        bst.insert("Michigan State Spartans");
-        bst.insert("Illinois Fighting Illini");
+        bst.insert(BigTenSchools.IOWA);
+        bst.insert(BigTenSchools.MICHIGAN_STATE);
+        bst.insert(BigTenSchools.ILLINOIS);
         assertEquals(3, bst.cardinality());
     }
 
     @Test
     public void threeItemTreeUnbalancedHasDepthOfThree() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert("Iowa Hawkeyes");
-        bst.insert("Indiana Hoosiers");
-        bst.insert("Illinois Fighting Illini");
+        bst.insert(BigTenSchools.IOWA);
+        bst.insert(BigTenSchools.INDIANA);
+        bst.insert(BigTenSchools.ILLINOIS);
         assertEquals(3, bst.depth());
     }
 
     @Test
     public void threeItemTreeBalancedHasDepthOfTwo() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert("Iowa Hawkeyes");
-        bst.insert("Michigan State Spartans");
-        bst.insert("Illinois Fighting Illini");
+        bst.insert(BigTenSchools.IOWA);
+        bst.insert(BigTenSchools.MICHIGAN_STATE);
+        bst.insert(BigTenSchools.ILLINOIS);
         assertEquals(2, bst.depth());
     }
 
+    @Test
+    public void searchForItemInEmptyTreeReturnsNull() {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        BinarySearchTree<String> found = bst.search(BigTenSchools.IOWA);
+        assertNull(found);
+    }
+
+    @Test
+    public void searchForItemAtRootReturnsItem() {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        bst.insert(BigTenSchools.IOWA);
+        BinarySearchTree<String> found = bst.search(BigTenSchools.IOWA);
+        assertNotNull(found);
+        assertEquals(BigTenSchools.IOWA, found.value());
+    }
+
+    @Test
+    public void searchForItemNotAtRootReturnsNull() {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        bst.insert(BigTenSchools.IOWA);
+        BinarySearchTree<String> found = bst.search(BigTenSchools.MICHIGAN_STATE);
+        assertNull(found);
+    }
 }
