@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BinarySearchTreeTest {
-    @Test
-    public void foo() {
-        assertEquals("bar", "foo");
-    }
 
     // Tree Operations: insert, delete, search, traverse, cardinality, depth
     // Empty tree has cardinality 0, depth 0, search for any item returns null
@@ -20,15 +16,27 @@ public class BinarySearchTreeTest {
     @Test
     public void emptyTreeHasCardinalityOfZero() {
         BinarySearchTree<String> bst = new BinarySearchTree();
-
         assertEquals(0, bst.cardinality());
     }
 
     @Test
     public void emptyTreeHasDepthOfZero() {
         BinarySearchTree<String> bst = new BinarySearchTree();
-
         assertEquals(0, bst.depth());
+    }
+
+    @Test
+    public void emptyTreeCanBeInsertedIntoAndHasCardinalityOfZero() {
+        BinarySearchTree<String> bst = new BinarySearchTree();
+        bst.insert("Iowa Hawkeyes");
+        assertEquals(1, bst.cardinality());
+    }
+
+    @Test
+    public void singleItemTreeHasDepthOfOne() {
+        BinarySearchTree<String> bst = new BinarySearchTree();
+        bst.insert("Iowa Hawkeyes");
+        assertEquals(1, bst.depth());
     }
 
 }
