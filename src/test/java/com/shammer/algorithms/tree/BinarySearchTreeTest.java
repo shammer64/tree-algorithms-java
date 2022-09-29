@@ -15,33 +15,33 @@ public class BinarySearchTreeTest {
 
     @Test
     public void emptyTreeHasCardinalityOfZero() {
-        BinarySearchTree<String> bst = new BinarySearchTree();
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
         assertEquals(0, bst.cardinality());
     }
 
     @Test
     public void emptyTreeHasDepthOfZero() {
-        BinarySearchTree<String> bst = new BinarySearchTree();
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
         assertEquals(0, bst.depth());
     }
 
     @Test
     public void emptyTreeCanBeInsertedIntoAndHasCardinalityOfZero() {
-        BinarySearchTree<String> bst = new BinarySearchTree();
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
         bst.insert("Iowa Hawkeyes");
         assertEquals(1, bst.cardinality());
     }
 
     @Test
     public void singleItemTreeHasDepthOfOne() {
-        BinarySearchTree<String> bst = new BinarySearchTree();
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
         bst.insert("Iowa Hawkeyes");
         assertEquals(1, bst.depth());
     }
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasCardinalityOfTwo() {
-        BinarySearchTree<String> bst = new BinarySearchTree();
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
         bst.insert("Iowa Hawkeyes");
         bst.insert("Michigan State Spartans");
         assertEquals(2, bst.cardinality());
@@ -49,7 +49,7 @@ public class BinarySearchTreeTest {
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasDepthOfTwo() {
-        BinarySearchTree<String> bst = new BinarySearchTree();
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
         bst.insert("Iowa Hawkeyes");
         bst.insert("Michigan State Spartans");
         assertEquals(2, bst.depth());

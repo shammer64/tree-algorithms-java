@@ -25,7 +25,7 @@ public class BinarySearchTree<T> {
     public void insert(T newValue) {
         if (value == null) value = newValue;
         else {
-            right = new BinarySearchTree<T>();
+            right = new BinarySearchTree<>();
             right.insert(newValue);
         }
     }
