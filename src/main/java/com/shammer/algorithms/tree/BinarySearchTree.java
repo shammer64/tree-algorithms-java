@@ -1,12 +1,17 @@
 package com.shammer.algorithms.tree;
 
-public class BinarySearchTree<T> {
+public class BinarySearchTree<T extends Comparable<T>> {
     private T value;
     private BinarySearchTree<T> right;
+    private BinarySearchTree<T> left;
 
     public long cardinality() {
         if (value == null) return 0;
-        return 1 + rightCardinality();
+        return 1 + leftCardinality() + rightCardinality();
+    }
+
+    private long leftCardinality() {
+        return (left == null) ? 0 : left.cardinality();
     }
 
     private long rightCardinality() {
@@ -15,7 +20,15 @@ public class BinarySearchTree<T> {
 
     public long depth() {
         if (value == null) return 0;
-        return 1 + rightDepth();
+        return 1 + childDepth();
+    }
+
+    private long childDepth() {
+        return Math.max(leftDepth(), rightDepth());
+    }
+
+    private long leftDepth() {
+        return (left == null) ? 0 : left.depth();
     }
 
     private long rightDepth() {
@@ -24,9 +37,14 @@ public class BinarySearchTree<T> {
 
     public void insert(T newValue) {
         if (value == null) value = newValue;
-        else {
-            right = new BinarySearchTree<>();
+        else if (newValue.compareTo(value) >= 0) {
+            if (right == null)
+                right = new BinarySearchTree<>();
             right.insert(newValue);
+        } else {
+            if (left == null)
+                left = new BinarySearchTree<>();
+            left.insert(newValue);
         }
     }
 }

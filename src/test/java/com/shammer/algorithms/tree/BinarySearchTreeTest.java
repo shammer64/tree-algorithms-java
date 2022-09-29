@@ -55,4 +55,31 @@ public class BinarySearchTreeTest {
         assertEquals(2, bst.depth());
     }
 
+    @Test
+    public void twoItemTreeCanBeInsertedBeforeAndHasCardinalityOfThree() {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        bst.insert("Iowa Hawkeyes");
+        bst.insert("Michigan State Spartans");
+        bst.insert("Illinois Fighting Illini");
+        assertEquals(3, bst.cardinality());
+    }
+
+    @Test
+    public void threeItemTreeUnbalancedHasDepthOfThree() {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        bst.insert("Iowa Hawkeyes");
+        bst.insert("Indiana Hoosiers");
+        bst.insert("Illinois Fighting Illini");
+        assertEquals(3, bst.depth());
+    }
+
+    @Test
+    public void threeItemTreeBalancedHasDepthOfTwo() {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        bst.insert("Iowa Hawkeyes");
+        bst.insert("Michigan State Spartans");
+        bst.insert("Illinois Fighting Illini");
+        assertEquals(2, bst.depth());
+    }
+
 }
