@@ -66,6 +66,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
         if (value == null) {
             return nodeList;
         }
+        if (left != null)
+            nodeList.addAll(left.traverseInOrder());
         nodeList.add(value);
         return nodeList;
     }
