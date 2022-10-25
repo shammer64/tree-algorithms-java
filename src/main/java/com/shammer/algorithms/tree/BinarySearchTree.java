@@ -62,11 +62,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public List<T> traverseInOrder() {
-        if (value != null) {
-            List<T> nodeList = new ArrayList<>();
-            nodeList.add(value);
+        List<T> nodeList = new ArrayList<>();
+        if (value == null) {
             return nodeList;
         }
-        return null;
+        nodeList.add(value);
+        return nodeList;
     }
 }

@@ -2,6 +2,7 @@ package com.shammer.algorithms.tree;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -106,6 +107,13 @@ public class BinarySearchTreeTest {
         bst.insert(BigTenSchools.IOWA);
         BinarySearchTree<String> found = bst.search(BigTenSchools.MICHIGAN_STATE);
         assertNull(found);
+    }
+
+    @Test
+    public void inOrderTraverseOfEmptyTree() {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        List<String> expectedNodes = new ArrayList<>();
+        assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
     @Test
