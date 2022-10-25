@@ -133,4 +133,14 @@ public class BinarySearchTreeTest {
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
+    @Test
+    public void inOrderTraverseOneLevelBalancedTree() {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        bst.insert(BigTenSchools.INDIANA);
+        bst.insert(BigTenSchools.IOWA);
+        bst.insert(BigTenSchools.ILLINOIS);
+        List<String> expectedNodes = List.of(BigTenSchools.ILLINOIS, BigTenSchools.INDIANA, BigTenSchools.IOWA);
+        assertEquals(expectedNodes, bst.traverseInOrder());
+    }
+
 }
