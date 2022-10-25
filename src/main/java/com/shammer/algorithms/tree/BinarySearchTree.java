@@ -1,5 +1,8 @@
 package com.shammer.algorithms.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinarySearchTree<T extends Comparable<T>> {
     private T value;
     private BinarySearchTree<T> right;
@@ -56,5 +59,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     public T value() {
         return value;
+    }
+
+    public List<T> traverseInOrder() {
+        if (value != null) {
+            List<T> nodeList = new ArrayList<>();
+            nodeList.add(value);
+            return nodeList;
+        }
+        return null;
     }
 }
