@@ -90,4 +90,18 @@ public class BinarySearchTree<T extends Comparable<T>> {
         if (tree != null)
             nodeList.addAll(tree.traversePostOrder());
     }
+
+    public List<T> traversePreOrder() {
+        ArrayList<T> nodeList = new ArrayList<>();
+        if (value == null) return nodeList;
+        nodeList.add(value);
+        traversePreOrder(nodeList, left);
+        traversePreOrder(nodeList, right);
+        return nodeList;
+    }
+
+    private void traversePreOrder(ArrayList<T> nodeList, BinarySearchTree<T> tree) {
+        if (tree != null)
+            nodeList.addAll(tree.traversePreOrder());
+    }
 }
