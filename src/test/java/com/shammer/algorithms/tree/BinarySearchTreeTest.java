@@ -45,42 +45,47 @@ public class BinarySearchTreeTest {
 
     @Test
     public void singleItemTreeHasDepthOfOne() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+            IOWA
+        );
         assertEquals(1, bst.depth());
     }
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasCardinalityOfTwo() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
-        bst.insert(MICHIGAN_STATE);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+            IOWA,
+            MICHIGAN_STATE
+        );
         assertEquals(2, bst.cardinality());
     }
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasDepthOfTwo() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
-        bst.insert(MICHIGAN_STATE);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+            IOWA,
+            MICHIGAN_STATE
+        );
         assertEquals(2, bst.depth());
     }
 
     @Test
     public void twoItemTreeCanBeInsertedBeforeAndHasCardinalityOfThree() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
-        bst.insert(MICHIGAN_STATE);
-        bst.insert(ILLINOIS);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+            IOWA,
+            MICHIGAN_STATE,
+            ILLINOIS
+        );
         assertEquals(3, bst.cardinality());
     }
 
     @Test
     public void threeItemTreeUnbalancedHasDepthOfThree() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
-        bst.insert(INDIANA);
-        bst.insert(ILLINOIS);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+            IOWA,
+            INDIANA,
+            ILLINOIS
+        );
         assertEquals(3, bst.depth());
     }
 
@@ -102,8 +107,9 @@ public class BinarySearchTreeTest {
 
     @Test
     public void searchForItemAtRootReturnsItem() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+                IOWA
+        );
         BinarySearchTree<String> found = bst.search(IOWA);
         assertNotNull(found);
         assertEquals(IOWA, found.value());
@@ -111,8 +117,9 @@ public class BinarySearchTreeTest {
 
     @Test
     public void searchForItemNotAtRootReturnsNull() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+                IOWA
+        );
         BinarySearchTree<String> found = bst.search(MICHIGAN_STATE);
         assertNull(found);
     }
@@ -126,17 +133,19 @@ public class BinarySearchTreeTest {
 
     @Test
     public void inOrderTraverseOfSingleItemTree() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+                IOWA
+        );
         List<String> expectedNodes = List.of(IOWA);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
     @Test
     public void inOrderTraverseOfTwoItemTreeLeft() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
-        bst.insert(ILLINOIS);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+            IOWA,
+            ILLINOIS
+        );
         List<String> expectedNodes = List.of(ILLINOIS, IOWA);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
