@@ -17,7 +17,7 @@ public class BinarySearchTreeTest {
     // Tree with three items (balanced) has cardinality 3, depth 2
     // Tree with three items (unbalanced) has cardinality 3, depth 3
 
-    private static BinarySearchTree<String> createBinarySearchTreeFromValues(String... values) {
+    private static BinarySearchTree<String> createTreeFromValues(String... values) {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
         for (String value : values)
             bst.insert(value);
@@ -38,63 +38,53 @@ public class BinarySearchTreeTest {
 
     @Test
     public void emptyTreeCanBeInsertedIntoAndHasCardinalityOfZero() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
+        BinarySearchTree<String> bst = createTreeFromValues(IOWA);
         assertEquals(1, bst.cardinality());
     }
 
     @Test
     public void singleItemTreeHasDepthOfOne() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-            IOWA
-        );
+        BinarySearchTree<String> bst = createTreeFromValues(IOWA);
         assertEquals(1, bst.depth());
     }
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasCardinalityOfTwo() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-            IOWA,
-            MICHIGAN_STATE
+        BinarySearchTree<String> bst = createTreeFromValues(
+                IOWA, MICHIGAN_STATE
         );
         assertEquals(2, bst.cardinality());
     }
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasDepthOfTwo() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-            IOWA,
-            MICHIGAN_STATE
+        BinarySearchTree<String> bst = createTreeFromValues(
+                IOWA, MICHIGAN_STATE
         );
         assertEquals(2, bst.depth());
     }
 
     @Test
     public void twoItemTreeCanBeInsertedBeforeAndHasCardinalityOfThree() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-            IOWA,
-            MICHIGAN_STATE,
-            ILLINOIS
+        BinarySearchTree<String> bst = createTreeFromValues(
+                IOWA, MICHIGAN_STATE, ILLINOIS
         );
         assertEquals(3, bst.cardinality());
     }
 
     @Test
     public void threeItemTreeUnbalancedHasDepthOfThree() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-            IOWA,
-            INDIANA,
-            ILLINOIS
+        BinarySearchTree<String> bst = createTreeFromValues(
+                IOWA, INDIANA, ILLINOIS
         );
         assertEquals(3, bst.depth());
     }
 
     @Test
     public void threeItemTreeBalancedHasDepthOfTwo() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(IOWA);
-        bst.insert(MICHIGAN_STATE);
-        bst.insert(ILLINOIS);
+        BinarySearchTree<String> bst = createTreeFromValues(
+                IOWA, MICHIGAN_STATE, ILLINOIS
+        );
         assertEquals(2, bst.depth());
     }
 
@@ -107,9 +97,7 @@ public class BinarySearchTreeTest {
 
     @Test
     public void searchForItemAtRootReturnsItem() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-                IOWA
-        );
+        BinarySearchTree<String> bst = createTreeFromValues(IOWA);
         BinarySearchTree<String> found = bst.search(IOWA);
         assertNotNull(found);
         assertEquals(IOWA, found.value());
@@ -117,9 +105,7 @@ public class BinarySearchTreeTest {
 
     @Test
     public void searchForItemNotAtRootReturnsNull() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-                IOWA
-        );
+        BinarySearchTree<String> bst = createTreeFromValues(IOWA);
         BinarySearchTree<String> found = bst.search(MICHIGAN_STATE);
         assertNull(found);
     }
@@ -133,18 +119,15 @@ public class BinarySearchTreeTest {
 
     @Test
     public void inOrderTraverseOfSingleItemTree() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-                IOWA
-        );
+        BinarySearchTree<String> bst = createTreeFromValues(IOWA);
         List<String> expectedNodes = List.of(IOWA);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
     @Test
     public void inOrderTraverseOfTwoItemTreeLeft() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-            IOWA,
-            ILLINOIS
+        BinarySearchTree<String> bst = createTreeFromValues(
+                IOWA, ILLINOIS
         );
         List<String> expectedNodes = List.of(ILLINOIS, IOWA);
         assertEquals(expectedNodes, bst.traverseInOrder());
@@ -152,10 +135,8 @@ public class BinarySearchTreeTest {
 
     @Test
     public void inOrderTraverseOneLevelBalancedTree() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-                INDIANA,
-                IOWA,
-                ILLINOIS
+        BinarySearchTree<String> bst = createTreeFromValues(
+                INDIANA, IOWA, ILLINOIS
         );
         List<String> expectedNodes = List.of(ILLINOIS, INDIANA, IOWA);
         assertEquals(expectedNodes, bst.traverseInOrder());
@@ -163,114 +144,107 @@ public class BinarySearchTreeTest {
 
     @Test
     public void inOrderTraverseOfSixItemTree() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-                PURDUE,
-                INDIANA,
-                MICHIGAN_STATE,
-                IOWA,
-                MICHIGAN,
-                ILLINOIS
+        BinarySearchTree<String> bst = createTreeFromValues(
+                PURDUE, INDIANA, MICHIGAN_STATE,
+                IOWA, MICHIGAN, ILLINOIS
         );
         List<String> expectedNodes = List.of(
-                ILLINOIS, INDIANA,
-                IOWA, MICHIGAN_STATE,
-                MICHIGAN, PURDUE);
+                ILLINOIS, INDIANA, IOWA,
+                MICHIGAN_STATE, MICHIGAN, PURDUE);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
     @Test
     public void postOrderTraverseOfEmptyTree() {
-        var bst = createBinarySearchTreeFromValues();
+        var bst = createTreeFromValues();
         assertEquals(new ArrayList<String>(), bst.traversePostOrder());
     }
 
     @Test
     public void postOrderTraverseOfSingleNode() {
-        var bst = createBinarySearchTreeFromValues(IOWA);
+        var bst = createTreeFromValues(IOWA);
         assertEquals(List.of(IOWA), bst.traversePostOrder());
     }
 
     @Test
     public void postOrderTraverseOfLeftNode() {
-        var bst = createBinarySearchTreeFromValues(
-                IOWA, INDIANA);
+        var bst = createTreeFromValues(
+                IOWA, INDIANA
+        );
         assertEquals(List.of(INDIANA, IOWA), bst.traversePostOrder());
     }
 
     @Test
     public void postOrderTraverseOfRightNode() {
-        var bst = createBinarySearchTreeFromValues(
-                IOWA, MICHIGAN);
+        var bst = createTreeFromValues(
+                IOWA, MICHIGAN
+        );
         assertEquals(List.of(MICHIGAN, IOWA), bst.traversePostOrder());
     }
 
     @Test
     public void postOrderTraverseOfLeftAndRightNode() {
-        var bst = createBinarySearchTreeFromValues(
-                IOWA, INDIANA, MICHIGAN);
+        var bst = createTreeFromValues(
+                IOWA, INDIANA, MICHIGAN
+        );
         assertEquals(List.of(INDIANA, MICHIGAN, IOWA), bst.traversePostOrder());
     }
 
     @Test
     public void postOrderTraverseOfSixItemTree() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-                PURDUE,
-                INDIANA,
-                MICHIGAN_STATE,
-                IOWA,
-                MICHIGAN,
-                ILLINOIS
+        BinarySearchTree<String> bst = createTreeFromValues(
+                PURDUE, INDIANA, MICHIGAN_STATE,
+                IOWA, MICHIGAN, ILLINOIS
         );
         List<String> expectedNodes = List.of(
                 ILLINOIS, IOWA, MICHIGAN,
-                MICHIGAN_STATE, INDIANA,
-                PURDUE);
+                MICHIGAN_STATE, INDIANA, PURDUE
+        );
         assertEquals(expectedNodes, bst.traversePostOrder());
     }
 
     @Test
     public void preOrderTraverseOfEmptyTree() {
-        var bst = createBinarySearchTreeFromValues();
+        var bst = createTreeFromValues();
         assertEquals(new ArrayList<String>(), bst.traversePreOrder());
     }
 
     @Test
     public void preOrderTraverseOfSingleNode() {
-        var bst = createBinarySearchTreeFromValues(IOWA);
+        var bst = createTreeFromValues(IOWA);
         assertEquals(List.of(IOWA), bst.traversePreOrder());
     }
 
     @Test
     public void preOrderTraverseOfLeftNode() {
-        var bst = createBinarySearchTreeFromValues(
-                IOWA, INDIANA);
+        var bst = createTreeFromValues(
+                IOWA, INDIANA
+        );
         assertEquals(List.of(IOWA, INDIANA), bst.traversePreOrder());
     }
 
     @Test
     public void preOrderTraverseOfRightNode() {
-        var bst = createBinarySearchTreeFromValues(
-                IOWA, MICHIGAN);
+        var bst = createTreeFromValues(
+                IOWA, MICHIGAN
+        );
         assertEquals(List.of(IOWA, MICHIGAN), bst.traversePreOrder());
     }
 
 
     @Test
     public void preOrderTraverseOfLeftAndRightNode() {
-        var bst = createBinarySearchTreeFromValues(
-                IOWA, INDIANA, MICHIGAN);
+        var bst = createTreeFromValues(
+                IOWA, INDIANA, MICHIGAN
+        );
         assertEquals(List.of(IOWA, INDIANA, MICHIGAN), bst.traversePreOrder());
     }
 
     @Test
     public void preOrderTraverseOfSixItemTree() {
-        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-                PURDUE,
-                INDIANA,
-                MICHIGAN_STATE,
-                IOWA,
-                MICHIGAN,
-                ILLINOIS
+        BinarySearchTree<String> bst = createTreeFromValues(
+                PURDUE, INDIANA, MICHIGAN_STATE,
+                IOWA, MICHIGAN, ILLINOIS
         );
         List<String> expectedNodes = List.of(
                 PURDUE, INDIANA, ILLINOIS,
