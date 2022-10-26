@@ -212,6 +212,23 @@ public class BinarySearchTreeTest {
     }
 
     @Test
+    public void postOrderTraverseOfSixItemTree() {
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+                PURDUE,
+                INDIANA,
+                MICHIGAN_STATE,
+                IOWA,
+                MICHIGAN,
+                ILLINOIS
+        );
+        List<String> expectedNodes = List.of(
+                ILLINOIS, IOWA, MICHIGAN,
+                MICHIGAN_STATE, INDIANA,
+                PURDUE);
+        assertEquals(expectedNodes, bst.traversePostOrder());
+    }
+
+    @Test
     public void preOrderTraverseOfEmptyTree() {
         var bst = createBinarySearchTreeFromValues();
         assertEquals(new ArrayList<String>(), bst.traversePreOrder());
@@ -245,4 +262,20 @@ public class BinarySearchTreeTest {
         assertEquals(List.of(IOWA, INDIANA, MICHIGAN), bst.traversePreOrder());
     }
 
+    @Test
+    public void preOrderTraverseOfSixItemTree() {
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+                PURDUE,
+                INDIANA,
+                MICHIGAN_STATE,
+                IOWA,
+                MICHIGAN,
+                ILLINOIS
+        );
+        List<String> expectedNodes = List.of(
+                PURDUE, INDIANA, ILLINOIS,
+                MICHIGAN_STATE, IOWA, MICHIGAN
+        );
+        assertEquals(expectedNodes, bst.traversePreOrder());
+    }
 }
