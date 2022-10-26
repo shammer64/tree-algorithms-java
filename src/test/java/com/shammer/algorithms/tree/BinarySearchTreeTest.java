@@ -143,4 +143,19 @@ public class BinarySearchTreeTest {
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
+    @Test
+    public void inOrderTraverseOfSixItemTree() {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        bst.insert(BigTenSchools.PURDUE);
+        bst.insert(BigTenSchools.INDIANA);
+        bst.insert(BigTenSchools.MICHIGAN_STATE);
+        bst.insert(BigTenSchools.IOWA);
+        bst.insert(BigTenSchools.MICHIGAN);
+        bst.insert(BigTenSchools.ILLINOIS);
+        List<String> expectedNodes = List.of(
+                BigTenSchools.ILLINOIS, BigTenSchools.INDIANA,
+                BigTenSchools.IOWA, BigTenSchools.MICHIGAN_STATE,
+                BigTenSchools.MICHIGAN, BigTenSchools.PURDUE);
+        assertEquals(expectedNodes, bst.traverseInOrder());
+    }
 }
