@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.shammer.algorithms.tree.BigTenSchools.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BinarySearchTreeTest {
@@ -15,6 +16,13 @@ public class BinarySearchTreeTest {
     // Tree with two items has cardinality 2, depth 2, search for item returns item
     // Tree with three items (balanced) has cardinality 3, depth 2
     // Tree with three items (unbalanced) has cardinality 3, depth 3
+
+    private static BinarySearchTree<String> createBinarySearchTreeFromValues(String... values) {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        for (String value : values)
+            bst.insert(value);
+        return bst;
+    }
 
     @Test
     public void emptyTreeHasCardinalityOfZero() {
@@ -31,81 +39,81 @@ public class BinarySearchTreeTest {
     @Test
     public void emptyTreeCanBeInsertedIntoAndHasCardinalityOfZero() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
+        bst.insert(IOWA);
         assertEquals(1, bst.cardinality());
     }
 
     @Test
     public void singleItemTreeHasDepthOfOne() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
+        bst.insert(IOWA);
         assertEquals(1, bst.depth());
     }
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasCardinalityOfTwo() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
-        bst.insert(BigTenSchools.MICHIGAN_STATE);
+        bst.insert(IOWA);
+        bst.insert(MICHIGAN_STATE);
         assertEquals(2, bst.cardinality());
     }
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasDepthOfTwo() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
-        bst.insert(BigTenSchools.MICHIGAN_STATE);
+        bst.insert(IOWA);
+        bst.insert(MICHIGAN_STATE);
         assertEquals(2, bst.depth());
     }
 
     @Test
     public void twoItemTreeCanBeInsertedBeforeAndHasCardinalityOfThree() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
-        bst.insert(BigTenSchools.MICHIGAN_STATE);
-        bst.insert(BigTenSchools.ILLINOIS);
+        bst.insert(IOWA);
+        bst.insert(MICHIGAN_STATE);
+        bst.insert(ILLINOIS);
         assertEquals(3, bst.cardinality());
     }
 
     @Test
     public void threeItemTreeUnbalancedHasDepthOfThree() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
-        bst.insert(BigTenSchools.INDIANA);
-        bst.insert(BigTenSchools.ILLINOIS);
+        bst.insert(IOWA);
+        bst.insert(INDIANA);
+        bst.insert(ILLINOIS);
         assertEquals(3, bst.depth());
     }
 
     @Test
     public void threeItemTreeBalancedHasDepthOfTwo() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
-        bst.insert(BigTenSchools.MICHIGAN_STATE);
-        bst.insert(BigTenSchools.ILLINOIS);
+        bst.insert(IOWA);
+        bst.insert(MICHIGAN_STATE);
+        bst.insert(ILLINOIS);
         assertEquals(2, bst.depth());
     }
 
     @Test
     public void searchForItemInEmptyTreeReturnsNull() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        BinarySearchTree<String> found = bst.search(BigTenSchools.IOWA);
+        BinarySearchTree<String> found = bst.search(IOWA);
         assertNull(found);
     }
 
     @Test
     public void searchForItemAtRootReturnsItem() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
-        BinarySearchTree<String> found = bst.search(BigTenSchools.IOWA);
+        bst.insert(IOWA);
+        BinarySearchTree<String> found = bst.search(IOWA);
         assertNotNull(found);
-        assertEquals(BigTenSchools.IOWA, found.value());
+        assertEquals(IOWA, found.value());
     }
 
     @Test
     public void searchForItemNotAtRootReturnsNull() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
-        BinarySearchTree<String> found = bst.search(BigTenSchools.MICHIGAN_STATE);
+        bst.insert(IOWA);
+        BinarySearchTree<String> found = bst.search(MICHIGAN_STATE);
         assertNull(found);
     }
 
@@ -119,58 +127,80 @@ public class BinarySearchTreeTest {
     @Test
     public void inOrderTraverseOfSingleItemTree() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
-        List<String> expectedNodes = List.of(BigTenSchools.IOWA);
+        bst.insert(IOWA);
+        List<String> expectedNodes = List.of(IOWA);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
     @Test
     public void inOrderTraverseOfTwoItemTreeLeft() {
         BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.IOWA);
-        bst.insert(BigTenSchools.ILLINOIS);
-        List<String> expectedNodes = List.of(BigTenSchools.ILLINOIS, BigTenSchools.IOWA);
+        bst.insert(IOWA);
+        bst.insert(ILLINOIS);
+        List<String> expectedNodes = List.of(ILLINOIS, IOWA);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
     @Test
     public void inOrderTraverseOneLevelBalancedTree() {
         BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-                BigTenSchools.INDIANA,
-                BigTenSchools.IOWA,
-                BigTenSchools.ILLINOIS
+                INDIANA,
+                IOWA,
+                ILLINOIS
         );
-        List<String> expectedNodes = List.of(BigTenSchools.ILLINOIS, BigTenSchools.INDIANA, BigTenSchools.IOWA);
+        List<String> expectedNodes = List.of(ILLINOIS, INDIANA, IOWA);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
     @Test
     public void inOrderTraverseOfSixItemTree() {
         BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
-                BigTenSchools.PURDUE,
-                BigTenSchools.INDIANA,
-                BigTenSchools.MICHIGAN_STATE,
-                BigTenSchools.IOWA,
-                BigTenSchools.MICHIGAN,
-                BigTenSchools.ILLINOIS
+                PURDUE,
+                INDIANA,
+                MICHIGAN_STATE,
+                IOWA,
+                MICHIGAN,
+                ILLINOIS
         );
         List<String> expectedNodes = List.of(
-                BigTenSchools.ILLINOIS, BigTenSchools.INDIANA,
-                BigTenSchools.IOWA, BigTenSchools.MICHIGAN_STATE,
-                BigTenSchools.MICHIGAN, BigTenSchools.PURDUE);
+                ILLINOIS, INDIANA,
+                IOWA, MICHIGAN_STATE,
+                MICHIGAN, PURDUE);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
-    private static BinarySearchTree<String> createBinarySearchTreeFromValues(String... values) {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        for (String value : values)
-            bst.insert(value);
-        return bst;
+    @Test
+    public void postOrderTraverseOfEmptyTree() {
+        var bst = createBinarySearchTreeFromValues();
+        assertEquals(new ArrayList<String>(), bst.traversePostOrder());
+    }
+
+    @Test
+    public void postOrderTraverseOfSingleNode() {
+        var bst = createBinarySearchTreeFromValues(IOWA);
+        assertEquals(List.of(IOWA), bst.traversePostOrder());
+    }
+
+    @Test
+    public void postOrderTraverseOfLeftNode() {
+        var bst = createBinarySearchTreeFromValues(
+                IOWA, INDIANA);
+        assertEquals(List.of(INDIANA, IOWA), bst.traversePostOrder());
+    }
+
+    @Test
+    public void postOrderTraverseOfRightNode() {
+        var bst = createBinarySearchTreeFromValues(
+                IOWA, MICHIGAN);
+        assertEquals(List.of(MICHIGAN, IOWA), bst.traversePostOrder());
+    }
+
+    @Test
+    public void postOrderTraverseOfLeftAndRightNode() {
+        var bst = createBinarySearchTreeFromValues(
+                IOWA, INDIANA, MICHIGAN);
+        assertEquals(List.of(INDIANA, MICHIGAN, IOWA), bst.traversePostOrder());
     }
 
 
-//    @Test
-//    public void postOrderTraverseOfEmptyTree() {
-//
-//    }
 }
