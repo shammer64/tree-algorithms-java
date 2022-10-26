@@ -135,27 +135,42 @@ public class BinarySearchTreeTest {
 
     @Test
     public void inOrderTraverseOneLevelBalancedTree() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.INDIANA);
-        bst.insert(BigTenSchools.IOWA);
-        bst.insert(BigTenSchools.ILLINOIS);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+                BigTenSchools.INDIANA,
+                BigTenSchools.IOWA,
+                BigTenSchools.ILLINOIS
+        );
         List<String> expectedNodes = List.of(BigTenSchools.ILLINOIS, BigTenSchools.INDIANA, BigTenSchools.IOWA);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
 
     @Test
     public void inOrderTraverseOfSixItemTree() {
-        BinarySearchTree<String> bst = new BinarySearchTree<>();
-        bst.insert(BigTenSchools.PURDUE);
-        bst.insert(BigTenSchools.INDIANA);
-        bst.insert(BigTenSchools.MICHIGAN_STATE);
-        bst.insert(BigTenSchools.IOWA);
-        bst.insert(BigTenSchools.MICHIGAN);
-        bst.insert(BigTenSchools.ILLINOIS);
+        BinarySearchTree<String> bst = createBinarySearchTreeFromValues(
+                BigTenSchools.PURDUE,
+                BigTenSchools.INDIANA,
+                BigTenSchools.MICHIGAN_STATE,
+                BigTenSchools.IOWA,
+                BigTenSchools.MICHIGAN,
+                BigTenSchools.ILLINOIS
+        );
         List<String> expectedNodes = List.of(
                 BigTenSchools.ILLINOIS, BigTenSchools.INDIANA,
                 BigTenSchools.IOWA, BigTenSchools.MICHIGAN_STATE,
                 BigTenSchools.MICHIGAN, BigTenSchools.PURDUE);
         assertEquals(expectedNodes, bst.traverseInOrder());
     }
+
+    private static BinarySearchTree<String> createBinarySearchTreeFromValues(String... values) {
+        BinarySearchTree<String> bst = new BinarySearchTree<>();
+        for (String value : values)
+            bst.insert(value);
+        return bst;
+    }
+
+
+//    @Test
+//    public void postOrderTraverseOfEmptyTree() {
+//
+//    }
 }
