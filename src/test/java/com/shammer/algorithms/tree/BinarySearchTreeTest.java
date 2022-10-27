@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.shammer.algorithms.tree.BigTenSchools.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -251,5 +252,76 @@ public class BinarySearchTreeTest {
                 MICHIGAN_STATE, IOWA, MICHIGAN
         );
         assertEquals(expectedNodes, bst.traversePreOrder());
+    }
+
+    @Test
+    public void shouldWorkWithIntegers() {
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        bst.insert(57);
+        bst.insert(23);
+        bst.insert(103);
+        bst.insert(93);
+        bst.insert(8);
+        bst.insert(85);
+        bst.insert(171);
+        List<Integer> expectedNodes = List.of(8, 23, 57, 85, 93, 103, 171);
+        assertEquals(expectedNodes, bst.traverseInOrder());
+    }
+
+    @Test
+    public void shouldWorkWithAClassThatImplementsComparable() {
+        BinarySearchTree<MyComparableThingy> bst = new BinarySearchTree<>();
+        bst.insert(new MyComparableThingy(139));
+        bst.insert(new MyComparableThingy(27));
+        bst.insert(new MyComparableThingy(78));
+        bst.insert(new MyComparableThingy(99));
+        bst.insert(new MyComparableThingy(127));
+        bst.insert(new MyComparableThingy(13));
+        List<MyComparableThingy> expectedNodes = List.of(
+                new MyComparableThingy(99),
+                new MyComparableThingy(78),
+                new MyComparableThingy(127),
+                new MyComparableThingy(139),
+                new MyComparableThingy(27),
+                new MyComparableThingy(13)
+        );
+        assertEquals(expectedNodes, bst.traverseInOrder());
+    }
+
+    static class MyComparableThingy implements Comparable<MyComparableThingy> {
+        private final int value;
+
+        public MyComparableThingy(int value) {
+            this.value = value;
+        }
+
+        @Override
+        public int compareTo(MyComparableThingy thingy) {
+            return this.distanceFrom100() - thingy.distanceFrom100();
+        }
+
+        private int distanceFrom100() {
+            return Math.abs(100 - value);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof MyComparableThingy)) return false;
+            MyComparableThingy that = (MyComparableThingy) o;
+            return value == that.value;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(value);
+        }
+
+        @Override
+        public String toString() {
+            return "MyComparableThingy{" +
+                    "value=" + value +
+                    '}';
+        }
     }
 }
