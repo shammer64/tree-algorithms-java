@@ -270,6 +270,7 @@ public class BinarySearchTreeTest {
 
     @Test
     public void shouldWorkWithAClassThatImplementsComparable() {
+        // MyComparableThingy comparison is by closest value to 100
         BinarySearchTree<MyComparableThingy> bst = new BinarySearchTree<>();
         bst.insert(new MyComparableThingy(139));
         bst.insert(new MyComparableThingy(27));
