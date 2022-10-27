@@ -78,7 +78,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public List<T> traversePostOrder() {
-        ArrayList<T> nodeList = new ArrayList<>();
+        List<T> nodeList = new ArrayList<>();
         if (value == null) return nodeList;
         traversePostOrder(nodeList, left);
         traversePostOrder(nodeList, right);
@@ -86,13 +86,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return nodeList;
     }
 
-    private void traversePostOrder(ArrayList<T> nodeList, BinarySearchTree<T> tree) {
+    private void traversePostOrder(List<T> nodeList, BinarySearchTree<T> tree) {
         if (tree != null)
             nodeList.addAll(tree.traversePostOrder());
     }
 
     public List<T> traversePreOrder() {
-        ArrayList<T> nodeList = new ArrayList<>();
+        List<T> nodeList = new ArrayList<>();
         if (value == null) return nodeList;
         nodeList.add(value);
         traversePreOrder(nodeList, left);
@@ -100,7 +100,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return nodeList;
     }
 
-    private void traversePreOrder(ArrayList<T> nodeList, BinarySearchTree<T> tree) {
+    private void traversePreOrder(List<T> nodeList, BinarySearchTree<T> tree) {
         if (tree != null)
             nodeList.addAll(tree.traversePreOrder());
     }
