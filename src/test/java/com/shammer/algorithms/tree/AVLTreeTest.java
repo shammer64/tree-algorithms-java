@@ -12,10 +12,10 @@ public class AVLTreeTest {
         assertEquals(0, ast.cardinality());
     }
 
-//    @Test
-//    public void emptyTreeHasDepthOfZero() {
-//        BinarySearchTree<String> bst = new BinarySearchTree<>();
-//        assertEquals(0, bst.depth());
-//    }
+    @Test
+    public void emptyTreeHasDepthOfZero() {
+        AVLSearchTree<String> ast = new AVLSearchTree<>();
+        assertEquals(0, ast.depth());
+    }
 
 }
