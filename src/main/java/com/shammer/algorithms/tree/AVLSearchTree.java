@@ -1,14 +1,19 @@
 package com.shammer.algorithms.tree;
 
-public class AVLSearchTree<T> {
+public class AVLSearchTree<T extends Comparable<T>> {
     private T value;
+    private AVLSearchTree<T> right;
 
     public long cardinality() {
-        return this.value == null ? 0 : 1;
+        return (this.value == null ? 0 : 1) + rightCardinality();
+    }
+
+    private long rightCardinality() {
+        return (right == null) ? 0 : right.cardinality();
     }
 
     public long depth() {
-        return 0;
+        return this.value == null ? 0 : 1;
     }
 
     public T value() {
@@ -16,6 +21,11 @@ public class AVLSearchTree<T> {
     }
 
     public void insert(T value) {
-        this.value=value;
+        if (this.value == null) {
+            this.value = value;
+        } else {
+            right = new AVLSearchTree<>();
+            right.insert(value);
+        }
     }
 }
