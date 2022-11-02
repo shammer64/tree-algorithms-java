@@ -2,12 +2,18 @@ package com.shammer.algorithms.tree;
 
 import org.junit.jupiter.api.Test;
 
-import static com.shammer.algorithms.tree.BigTenSchools.IOWA;
-import static com.shammer.algorithms.tree.BigTenSchools.MICHIGAN_STATE;
+import static com.shammer.algorithms.tree.BigTenSchools.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class AVLTreeTest {
+
+    private AVLSearchTree<String> createTreeFromValues(String... values) {
+        AVLSearchTree<String> ast = new AVLSearchTree<>();
+        for (String value : values)
+            ast.insert(value);
+        return ast;
+    }
 
     @Test
     public void emptyTreeHasCardinalityOfZero() {
@@ -45,17 +51,41 @@ public class AVLTreeTest {
 
     @Test
     public void singleItemTreeCanBeInsertedAfterAndHasCardinalityOfTwo() {
-        AVLSearchTree<String> ast = this.createTreeFromValues(
+        AVLSearchTree<String> ast = createTreeFromValues(
                 IOWA, MICHIGAN_STATE
         );
         assertEquals(2, ast.cardinality());
     }
 
-    private AVLSearchTree<String> createTreeFromValues(String... values) {
-        AVLSearchTree<String> ast = new AVLSearchTree<>();
-        for (String value : values)
-            ast.insert(value);
-        return ast;
+    @Test
+    public void singleItemTreeCanBeInsertedAfterAndHasDepthOfTwo() {
+        AVLSearchTree<String> ast = createTreeFromValues(
+                IOWA, MICHIGAN_STATE
+        );
+        assertEquals(2, ast.depth());
+    }
+
+    @Test
+    public void singleItemTreeCanBeInsertedBeforeAndHasCardinalityOfThree() {
+        AVLSearchTree<String> ast = createTreeFromValues(
+                IOWA, MICHIGAN_STATE, INDIANA
+        );
+        assertEquals(3, ast.cardinality());
+    }
+
+    @Test
+    public void singleItemTreeCanBeInsertedBeforeAndHasDepthOfTwo() {
+        AVLSearchTree<String> ast = createTreeFromValues(
+                IOWA, INDIANA
+        );
+        assertEquals(2, ast.depth());
+    }
+    @Test
+    public void threeItemBalancedTreeHasDepthOfTwo() {
+        AVLSearchTree<String> ast = createTreeFromValues(
+                IOWA, MICHIGAN_STATE, INDIANA
+        );
+        assertEquals(2, ast.depth());
     }
 
 }
